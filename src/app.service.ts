@@ -8,7 +8,7 @@ import { Tags } from './db/tangs.entitiy';
 
 @Injectable()
 export class AppService {
-
+ 
   constructor(
     @InjectRepository(Command)
     private readonly repoCommand: Repository< Command>,  
@@ -16,8 +16,13 @@ export class AppService {
     private readonly repoTags: Repository<Tags>
   ){}
 
-  getHello(): string {
-    return 'Hello World!';
+
+  async buscador(tag: string) {
+    return this.repoCommand
+    .createQueryBuilder("c")
+    .leftJoinAndSelect("c.tag", "t")
+    .where("t.tag ILIKE :q", {q: `%${tag}%`})
+    .getMany()
   }
 
   async tag(body: TagDto) {

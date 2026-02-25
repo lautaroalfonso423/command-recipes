@@ -1,5 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { ManyToOne } from "typeorm/browser";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Tags } from "./tangs.entitiy";
 import { Language } from "src/language.enum";
 
@@ -10,11 +9,11 @@ import { Language } from "src/language.enum";
 
 export class Command {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string
 
     @Column({length: 50})
-    descrption: string 
+    description: string 
     
     @Column()
     snippet: string
@@ -24,7 +23,7 @@ export class Command {
         enum: Language,
         default: Language.POWERSHELL
     })
-    language: Language.POWERSHELL
+    language: Language
 
     @ManyToOne(() => Tags, e => e.commands)
     tag: Tags

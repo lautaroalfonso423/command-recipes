@@ -1,4 +1,4 @@
-import { Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Command } from "./command.entity";
 
 
@@ -8,9 +8,10 @@ import { Command } from "./command.entity";
 
 export class Tags {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string
 
+    @Column()
     tag: string
     
     @OneToMany(() => Command, e => e.tag)
