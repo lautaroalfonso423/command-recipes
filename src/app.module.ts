@@ -17,9 +17,9 @@ import { Tags } from './db/tangs.entitiy';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'postgres',
-      password: 'admin',
-      database: 'postgres',
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [Command, Tags],
       synchronize: true,
     })
