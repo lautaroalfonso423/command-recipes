@@ -29,4 +29,11 @@ export class AppController {
     return this.appService.command(id, body)
   }
 
+  @Get("run/:id")
+  runCommand(
+    @Param("id", new ParseUUIDPipe()) id: string
+  ){
+    return this.appService.run(id)
+  }
+
 }
