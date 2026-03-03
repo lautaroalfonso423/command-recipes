@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
 import { CommandDto } from './dto/command.dto';
 import { TagDto } from './dto/tags.dto';
 import { Command } from './db/command.entity';
@@ -28,9 +28,11 @@ export class AppService {
     const data = await this.repoCommand.findOne({
       where: {id: id}
     })
-  
+
     if(!id) throw new BadRequestException("No existe.")
-    
+
+      
+
     let shellToUse = "cmd.exe"
 
     if(data?.language === Language.POWERSHELL){
@@ -39,7 +41,11 @@ export class AppService {
       shellToUse = "bash.exe"
     }
 
-
+    const commandoPermitido = [
+      'dir', 'ls', 'ping', 'echo', 'git']
+    if(!commandoPermitido.includes(String(data?.snippet))){
+        throw new ForbiddenException(`Comando '${data?.snippet}' no autorizado por seguridad.`);
+    }
 
     try {
       const {stdout, stderr} = await execPromise(String(data?.snippet), {shell: shellToUse})
