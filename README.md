@@ -1,6 +1,6 @@
 # 🚀 CommandHub
 
-Proyecto sencillo que permite ejecutar scripts mediante exec(). Para ejecutar scripts más complejos o con gran volumen de datos, se recomienda usar spawn().
+Proyecto sencillo que permite ejecutar scripts mediante exec(). Para ejecutar scripts más complejos o con gran volumen de datos, se recomienda usar spawn().(Descomentarlo)
 
 ---
 
