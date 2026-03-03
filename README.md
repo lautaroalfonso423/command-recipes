@@ -24,7 +24,7 @@ Para ejecutar este proyecto localmente, sigue estos pasos:
 
 1. **Clona el repositorio:**
    ```bash
-   git clone https://github.com/lautaroalfonso423/web-defender.git
+   git clone https://github.com/lautaroalfonso423/command-recipes.git
 
 2. **Instala dependencias:**
     ```bash
