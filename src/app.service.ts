@@ -43,9 +43,14 @@ export class AppService {
 
     const commandoPermitido = [
       'dir', 'ls', 'ping', 'echo', 'git']
-    if(!commandoPermitido.includes(String(data?.snippet))){
+
+    const esValido = commandoPermitido.some(prev => data?.snippet.trim().startsWith(prev))
+      
+    if(!esValido){
         throw new ForbiddenException(`Comando '${data?.snippet}' no autorizado por seguridad.`);
     }
+
+    if(/[&|;]/.test(String(data?.snippet))) throw new ForbiddenException("No se permiten operadores de encadenamiento (&, |, ;)");
 
     try {
       const {stdout, stderr} = await execPromise(String(data?.snippet), {shell: shellToUse})
